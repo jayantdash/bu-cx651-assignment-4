@@ -1,0 +1,1 @@
+(1) In the plot-single.png, execution time increasing significantly as the matrix size increases. In plot-multi.png, the execution times are all between 4–5 seconds and do not change very much between runs. CPU usage is also much lower, between 17–18%.
