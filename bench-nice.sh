@@ -8,6 +8,7 @@ mkdir -p data/bench-nice
 
 for i in $(seq 100 100 1000)
 do
+    # Alternate niceness between 0 and 19 for each iteration
     if [ $((i / 100 % 2)) -eq 1 ]; then
         NICENESS=0
     else
