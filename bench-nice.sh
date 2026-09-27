@@ -6,9 +6,15 @@ echo "starting matrix multiply"
 
 mkdir -p data/bench-nice
 
-for i in $(seq 100 100 100)
+for i in $(seq 100 100 1000)
 do
-    /usr/bin/time -f "CPU: %P\n" -o data/bench-nice/mm-${i}-cpu.out nice -n 10 ./bench ${i} ${i} ${i} 0 > data/bench-nice/mm-${i}.out 
+    if [ $((i / 100 % 2)) -eq 1 ]; then
+        NICENESS=0
+    else
+        NICENESS=19
+    fi
+    
+    /usr/bin/time -f "CPU: %P\n" -o data/bench-nice/mm-${i}-cpu.out nice -n ${NICENESS} ./bench ${i} ${i} ${i} 0 > data/bench-nice/mm-${i}.out 
     pids[${i}]=$!
     echo $(date)
 done
